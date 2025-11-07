@@ -6,3 +6,5 @@ data/
 week0
 
 .vscode
+
+.DS_Store
