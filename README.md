@@ -1,4 +1,4 @@
-# ☀️ solar-challenge-week0
+# ☀️ Moonlight Solar Energy Assessment
 
 This task focuses on analyzing solar energy data to help MoonLight Energy Solutions identify regions with high solar potential. It involves profiling, cleaning, and exploring datasets from multiple countries, detecting patterns and anomalies through EDA and statistical analysis, and comparing metrics like GHI, DNI, and DHI across regions. The final step includes building an interactive Streamlit dashboard to visualize insights, enabling data-driven recommendations for solar investment and sustainability planning.
 
