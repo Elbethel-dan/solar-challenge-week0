@@ -31,7 +31,7 @@ To set up and reproduce this project locally, follow the steps below:
  ```
 # West Africa Solar Potential Dashboard
 
-An **interactive Streamlit dashboard** comparing solar radiation (GHI, DNI, DHI) across **Benin, Sierra Leone, and Togo** using **cleaned NASA POWER data**.
+An **interactive Streamlit dashboard** comparing solar radiation (GHI, DNI, DHI) across **Benin, Sierra Leone, and Togo** using **cleaned solar energy data**.
 
 Live app: [https://solar-challenge-week0.streamlit.app](https://solar-challenge-week0-h4yobtuwm7thk4nq4gt58h.streamlit.app/)
 
