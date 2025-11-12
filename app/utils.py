@@ -5,34 +5,48 @@ from typing import List
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+import requests
+from io import StringIO
+from pathlib import Path
+from typing import List
+import seaborn as sns
+import streamlit as st
 
-# Auto-detect project root and data directory
-BASE_DIR = Path(__file__).parent.parent
-DATA_DIR = BASE_DIR / "data"
-
-
-FILES = {
-    "Benin": DATA_DIR / "benin_data_cleaned.csv",
-    "Sierra Leone": DATA_DIR / "sierra-leone_data_cleaned.csv",
-    "Togo": DATA_DIR / "togo_data_cleaned.csv"
+DRIVE_URLS = {
+    "Benin": "https://drive.google.com/uc?export=download&id=1NkbfaNVTi72KklJId9ig4rb-hq5qYp-S",
+    "Sierra Leone": "https://drive.google.com/uc?export=download&id=1ohs_k8_xXbqWtUMAQDQBIIGnVyT2eKfD",
+    "Togo": "https://drive.google.com/uc?export=download&id=1wgceXz5jcIkUSIJZDfjc8a8NDkfBOlqB"
 }
 
 RAD_COLS = ['GHI', 'DNI', 'DHI']
 
-#Load & Combine All Data 
 def load_all_data() -> pd.DataFrame:
-    dfs = []
-    for country, path in FILES.items():
-        if not path.exists():
-            raise FileNotFoundError(f"Missing data file: {path}")
-        df = pd.read_csv(path)
-        df["Country"] = country
-        dfs.append(df)
-    
+    """Download CSVs from Google Drive and return a combined DataFrame."""
+    dfs: List[pd.DataFrame] = []
+
+    for country, url in DRIVE_URLS.items():
+        try:
+            r = requests.get(url, timeout=30)
+            r.raise_for_status()
+            # pandas can read directly from text
+            df = pd.read_csv(StringIO(r.text))
+            df["Country"] = country
+            dfs.append(df)
+            st.success(f"Loaded {country} ({len(df):,} rows)")
+        except Exception as e:
+            st.error(f"Failed to load {country}: {e}")
+            raise
+
+    if not dfs:
+        raise ValueError("No data loaded from any country.")
+
     combined = pd.concat(dfs, ignore_index=True)
+
+    # Force numeric where needed
     for col in RAD_COLS:
         if col in combined.columns:
-            combined[col] = pd.to_numeric(combined[col], errors='coerce')
+            combined[col] = pd.to_numeric(combined[col], errors="coerce")
+
     return combined
 
 # Filter by Countries 
