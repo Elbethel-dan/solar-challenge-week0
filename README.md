@@ -29,5 +29,24 @@ To set up and reproduce this project locally, follow the steps below:
   ```bash
      pip install -r requirements.txt
  ```
+# West Africa Solar Potential Dashboard
 
+An **interactive Streamlit dashboard** comparing solar radiation (GHI, DNI, DHI) across **Benin, Sierra Leone, and Togo** using **cleaned NASA POWER data**.
+
+Live app: [https://solar-challenge-week0.streamlit.app](https://solar-challenge-week0-h4yobtuwm7thk4nq4gt58h.streamlit.app/)
+
+---
+
+## Features
+
+- **Interactive filters**: Select countries & metric (GHI/DNI/DHI)
+- **Box plots**, **bar charts**, **daily profiles**, **capacity factor**, **temperature impact**
+- **Data loaded from Google Drive** (no local files needed)
+- **Clean, professional UI** with sidebar status
+- **Fully deployed on Streamlit Cloud**
+  
+## To run the Streamlit app
+   ```bash
+      streamlit run app/main.py
+   ```
    
